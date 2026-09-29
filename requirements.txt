@@ -1,7 +1,0 @@
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
-# [curl-cffi] extra lets yt-dlp pick a compatible curl_cffi for browser impersonation
-yt-dlp[default,curl-cffi]>=2026.8.0
-python-dotenv==1.0.1
-PySocks>=1.7.1
-requests>=2.32.2,<3
