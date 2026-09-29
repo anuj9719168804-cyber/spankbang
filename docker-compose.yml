@@ -1,0 +1,19 @@
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=info
+    # uncomment to route the browser through a proxy too:
+    # (proxy is also passed per-request from SPANKBANG_PROXY)
+
+  api:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - FLARESOLVERR_URL=http://flaresolverr:8191
+      # - SPANKBANG_PROXY=http://user:pass@host:port   # only if the IP is blocked
+    depends_on:
+      - flaresolverr
