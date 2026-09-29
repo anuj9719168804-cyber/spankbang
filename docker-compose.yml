@@ -1,0 +1,9 @@
+services:
+  api:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    shm_size: "1gb"
+    # environment:
+    #   - SPANKBANG_PROXY=http://user:pass@host:port   # only if the IP is blocked
