@@ -1,4 +1,3 @@
-# FlareSolverr + FastAPI in one container
 FROM ghcr.io/flaresolverr/flaresolverr:latest
 
 USER root
@@ -6,7 +5,8 @@ USER root
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    PATH="/srv/api/.venv/bin:$PATH"
+    PATH="/srv/api/.venv/bin:$PATH" \
+    FLARESOLVERR_URL="http://127.0.0.1:8191/v1"
 
 WORKDIR /srv/api
 
@@ -18,6 +18,6 @@ RUN /usr/local/bin/python -m venv /srv/api/.venv \
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8000 8191
 
-CMD ["/srv/api/.venv/bin/uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["/bin/sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}"]
